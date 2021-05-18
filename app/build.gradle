@@ -19,8 +19,9 @@ dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
 
-	implementation platform("org.lwjgl:lwjgl-bom:3.2.3")
+	implementation group: 'com.beust', name: 'klaxon', version: '5.5'
 
+	implementation platform("org.lwjgl:lwjgl-bom:3.2.3")
 	implementation "org.lwjgl:lwjgl"
 	implementation "org.lwjgl:lwjgl-assimp"
 	implementation "org.lwjgl:lwjgl-glfw"

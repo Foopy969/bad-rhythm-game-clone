@@ -1,5 +1,7 @@
 package bad.rhythm.game.clone
 
+import com.beust.klaxon.*
+import java.io.File
 import java.nio.*
 import org.lwjgl.*
 import org.lwjgl.glfw.*
@@ -45,64 +47,25 @@ class Engine {
 
     private fun loop() {
 
+        var beatmap: Beatmap = Klaxon().parse<Beatmap>(File("test.json").readText(Charsets.UTF_8))!!
+        var game: Game = Game(beatmap)
+        game.start()
+
         GL.createCapabilities()
         glClearColor(0f, 0f, 0f, 0f)
 
         while (!glfwWindowShouldClose(window!!)) {
 
             glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
-            render()
+            render(game)
             glfwSwapBuffers(window!!)
             glfwPollEvents()
         }
     }
 
-    private fun render() {
-        // Draw  roads
-        glColor3f(1f, 1f, 1f)
+    private fun render(game: Game) {
 
-        glBegin(GL_LINES)
-        glVertex2f(0.0f, 1.0f)
-        glVertex2f(0.0f, -1.0f)
-
-        glVertex2f(0.2f, 1.0f)
-        glVertex2f(0.8f, -1.0f)
-
-        glVertex2f(0.1f, 1.0f)
-        glVertex2f(0.4f, -1.0f)
-
-        glVertex2f(-0.2f, 1.0f)
-        glVertex2f(-0.8f, -1.0f)
-
-        glVertex2f(-0.1f, 1.0f)
-        glVertex2f(-0.4f, -1.0f)
-
-        glVertex2f(-1.0f, -0.8f)
-        glVertex2f(1.0f, -0.8f)
-        glEnd()
-
-        // Draw highlighted
-        val curserPos: Pair<Double, Double> = getCursorPos()
-
-        if (curserPos != Pair(-1.0, -1.0)) {
-
-            glColor4f(1f, 1f, 1f, 0.5f)
-
-            glBegin(GL_POLYGON)
-        }
-
-        glColor4f(1f, 1f, 1f, 0.5f)
-
-        glBegin(GL_POLYGON)
-
-        glEnd()
-    }
-
-    fun drawNote(distance: Double, column: Int) {
-
-        
-
-
+        game.draw()
     }
 
     fun run() {
@@ -122,15 +85,11 @@ class Engine {
 
     private fun getCursorPos(): Pair<Double, Double> {
 
-        if (glfwGetMouseButton(window!!, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
+        val xBuffer: DoubleBuffer = BufferUtils.createDoubleBuffer(1)
+        val yBuffer: DoubleBuffer = BufferUtils.createDoubleBuffer(1)
 
-            val xBuffer: DoubleBuffer = BufferUtils.createDoubleBuffer(1)
-            val yBuffer: DoubleBuffer = BufferUtils.createDoubleBuffer(1)
+        glfwGetCursorPos(window!!, xBuffer, yBuffer)
 
-            glfwGetCursorPos(window!!, xBuffer, yBuffer)
-
-            return Pair(xBuffer.get(0), yBuffer.get(0))
-        }
-        return Pair(-1.0, -1.0)
+        return Pair(xBuffer.get(0), yBuffer.get(0))
     }
 }
