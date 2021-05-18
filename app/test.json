@@ -1,0 +1,44 @@
+{
+    "name": "test",
+    "sections": [
+        {
+            "bpm": 100,
+            "offset": 2,
+            "hitObjects": [
+                {
+                    "column": 1,
+                    "time": 0
+                },
+                {
+                    "column": 3,
+                    "time": 6
+                },
+                {
+                    "column": 1,
+                    "time": 12
+                },
+                {
+                    "column": 0,
+                    "time": 18
+                },
+                {
+                    "column": 2,
+                    "time": 24
+                },
+                {
+                    "column": 0,
+                    "time": 30
+                },
+                {
+                    "column": 2,
+                    "time": 36
+                },
+                {
+                    "column": 3,
+                    "time": 42
+                }
+            ]
+        }
+    ]
+
+}
