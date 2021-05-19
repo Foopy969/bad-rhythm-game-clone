@@ -3,7 +3,7 @@
     "sections": [
         {
             "bpm": 157,
-            "offset": 2.271,
+            "offset": 2271,
             "hitObjects": [
                 {
                     "column": 1,
@@ -11,65 +11,66 @@
                 },
                 {
                     "column": 2,
-                    "time": 72
+                    "time": 96
                 },
                 {
                     "column": 1,
-                    "time": 132
-                },
-                {
-                    "column": 2,
-                    "time": 135
-                },
-                {
-                    "column": 1,
-                    "time": 138
-                },
-                {
-                    "column": 0,
-                    "time": 141
-                },
-                {
-                    "column": 1,
-                    "time": 144
-                },
-                {
-                    "column": 2,
-                    "time": 150
-                },
-                {
-                    "column": 1,
-                    "time": 153
-                },
-                {
-                    "column": 3,
-                    "time": 156
-                },
-                {
-                    "column": 0,
-                    "time": 162
-                },
-                {
-                    "column": 3,
-                    "time": 168
-                },
-                {
-                    "column": 2,
-                    "time": 174
-                },
-                {
-                    "column": 3,
-                    "time": 177
-                },
-                {
-                    "column": 0,
                     "time": 180
+                },
+                {
+                    "column": 2,
+                    "time": 183
                 },
                 {
                     "column": 1,
                     "time": 186
+                },
+                {
+                    "column": 0,
+                    "time": 189
+                },
+                {
+                    "column": 1,
+                    "time": 192
+                },
+                {
+                    "column": 2,
+                    "time": 198
+                },
+                {
+                    "column": 1,
+                    "time": 201
+                },
+                {
+                    "column": 3,
+                    "time": 204
+                },
+                {
+                    "column": 0,
+                    "time": 210
+                },
+                {
+                    "column": 3,
+                    "time": 213
+                },
+                {
+                    "column": 2,
+                    "time": 216
+                },
+                {
+                    "column": 3,
+                    "time": 222
+                },
+                {
+                    "column": 0,
+                    "time": 225
+                },
+                {
+                    "column": 1,
+                    "time": 228
                 }
             ]
         }
     ]
+
 }

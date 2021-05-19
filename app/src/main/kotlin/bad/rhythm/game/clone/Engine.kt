@@ -1,96 +1,79 @@
 package bad.rhythm.game.clone
 
-import com.beust.klaxon.*
-import java.io.File
-import java.nio.*
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.graphics.Color
+import ktx.app.KtxApplicationAdapter
+import ktx.app.clearScreen
+import ktx.graphics.use
+import kotlin.math.pow
 
-import org.lwjgl.opengl.GL11.*
-import org.lwjgl.*;
-import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.system.*;
+class Engine() : KtxApplicationAdapter {
 
-import org.lwjgl.glfw.Callbacks.*
-import org.lwjgl.glfw.GLFW.*
-import org.lwjgl.system.MemoryUtil.*
+    private lateinit var renderer: ShapeRenderer
+    private lateinit var game: Game
 
-class Engine {
+    // hardcoded for now
+    private val screen: Pair<Float, Float> = Pair(1280f, 720f)
+    private val width: Float = 240f
+    private val vanishing: Float = 1220f
+    private val judgement: Float = 80f
 
-    companion object {
+    // runtime constants
+    private val center: Pair<Float, Float> = Pair(screen.first / 2, screen.second / 2)
+    private val bottoms: Array<Float> = arrayOf(2 * width, width, 0f, - width, - 2 * width)
 
-        val WINDOW_SIZE = Pair(1280, 720)
-    }
+    override fun create() {
+        game = Game(FileReader.ReadFile("test.json"))
 
-    private var error: GLFWErrorCallback? = null
-    private var window: Long? = null
+        var song = Gdx.audio.newMusic(Gdx.files.internal("audio.mp3"));
+        song.setLooping(false);
+        song.play();
 
-    private fun init() {
-
-        error = glfwSetErrorCallback(GLFWErrorCallback.createPrint(System.err))
-
-        if (!glfwInit()) {
-            throw IllegalStateException("Unable to initialize GLFW")
-        }
-
-        glfwDefaultWindowHints()
-        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE)
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE)
-
-        window = glfwCreateWindow(WINDOW_SIZE.first, WINDOW_SIZE.second, "Yum Game", NULL, NULL)
-        if (window == NULL) {
-            throw RuntimeException("Failed to create the GLFW window")
-        }
-
-        glfwMakeContextCurrent(window!!)
-        glfwSwapInterval(1)
-        glfwShowWindow(window!!)
-    }
-
-    private fun loop() {
-
-        var beatmap: Beatmap = Klaxon().parse<Beatmap>(File("test.json").readText(Charsets.UTF_8))!!
-        var game: Game = Game(beatmap)
+        renderer = ShapeRenderer()
         game.start()
+    }
 
-        GL.createCapabilities()
-        glClearColor(0f, 0f, 0f, 0f)
+    override fun render() {
+        handleInput()
+        logic()
+        draw()
+    }
 
-        while (!glfwWindowShouldClose(window!!)) {
+    private fun handleInput() {
 
-            glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
-            render(game)
-            glfwSwapBuffers(window!!)
-            glfwPollEvents()
+    }
+
+    private fun logic() {
+
+    }
+
+    private fun draw() {
+        // clear screen
+        clearScreen(0f, 0f, 0f, 0f)
+
+        // draw background
+        renderer.use(ShapeRenderer.ShapeType.Line) {
+            renderer.color = Color.WHITE
+            renderer.line(0f, judgement, screen.first, judgement)
+            bottoms.forEach {
+                renderer.line(center.first, vanishing, it + center.first, 0f)
+            }
+        }
+
+        // draw notes
+        game.calculate().forEach {
+            var column = it.first
+            var y = vanishing - (vanishing - judgement) * it.second.pow(3f)
+            var x = (y - vanishing) / (vanishing)
+
+            renderer.use(ShapeRenderer.ShapeType.Line) {
+                renderer.line(x * bottoms[column] + center.first, y, x * bottoms[column + 1] + center.first, y)
+            }
         }
     }
 
-    private fun render(game: Game) {
-
-        game.draw()
-    }
-
-    fun run() {
-
-        try {
-
-            init()
-            loop()
-
-            glfwDestroyWindow(window!!)
-        } finally {
-
-            glfwTerminate()
-            error?.free()
-        }
-    }
-
-    private fun getCursorPos(): Pair<Double, Double> {
-
-        val xBuffer: DoubleBuffer = BufferUtils.createDoubleBuffer(1)
-        val yBuffer: DoubleBuffer = BufferUtils.createDoubleBuffer(1)
-
-        glfwGetCursorPos(window!!, xBuffer, yBuffer)
-
-        return Pair(xBuffer.get(0), yBuffer.get(0))
+    private enum class State {
+        TITLE, MENU, GAME
     }
 }

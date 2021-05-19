@@ -1,3 +1,3 @@
 package bad.rhythm.game.clone
 
-class Section(var bpm: Int, var offset: Double, var hitObjects: Array<HitObject>) {}
+class Section(var bpm: Float, var offset: Int, var hitObjects: Array<HitObject>) {}
