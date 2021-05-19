@@ -25,3 +25,9 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Upload output
+      uses: actions/upload-artifact@v2.2.3
+      with:
+        name: yum game
+        path: |
+          dist
