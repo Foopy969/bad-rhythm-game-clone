@@ -1,6 +1,7 @@
 package bad.rhythm.game.clone
 
-fun main(args: Array<String>) {
+public fun main(args: Array<String>) {
+
     val engine = Engine()
     engine.run()
 }

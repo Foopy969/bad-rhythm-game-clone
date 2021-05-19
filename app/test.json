@@ -1,44 +1,75 @@
 {
-    "name": "test",
+    "name": "en. v1.89",
     "sections": [
         {
-            "bpm": 100,
-            "offset": 2,
+            "bpm": 157,
+            "offset": 2.271,
             "hitObjects": [
                 {
                     "column": 1,
                     "time": 0
                 },
                 {
-                    "column": 3,
-                    "time": 6
+                    "column": 2,
+                    "time": 72
                 },
                 {
                     "column": 1,
-                    "time": 12
-                },
-                {
-                    "column": 0,
-                    "time": 18
+                    "time": 132
                 },
                 {
                     "column": 2,
-                    "time": 24
+                    "time": 135
+                },
+                {
+                    "column": 1,
+                    "time": 138
                 },
                 {
                     "column": 0,
-                    "time": 30
+                    "time": 141
+                },
+                {
+                    "column": 1,
+                    "time": 144
                 },
                 {
                     "column": 2,
-                    "time": 36
+                    "time": 150
+                },
+                {
+                    "column": 1,
+                    "time": 153
                 },
                 {
                     "column": 3,
-                    "time": 42
+                    "time": 156
+                },
+                {
+                    "column": 0,
+                    "time": 162
+                },
+                {
+                    "column": 3,
+                    "time": 168
+                },
+                {
+                    "column": 2,
+                    "time": 174
+                },
+                {
+                    "column": 3,
+                    "time": 177
+                },
+                {
+                    "column": 0,
+                    "time": 180
+                },
+                {
+                    "column": 1,
+                    "time": 186
                 }
             ]
         }
     ]
-
 }

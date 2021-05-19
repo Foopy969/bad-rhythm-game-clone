@@ -3,6 +3,13 @@ plugins {
     id 'application'
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'bad.rhythm.game.clone.AppKt'
+    }
+	from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
 compileKotlin {
     kotlinOptions.jvmTarget= "1.8"
 }
@@ -13,12 +20,8 @@ repositories {
 }
 
 dependencies {
-    implementation platform('org.jetbrains.kotlin:kotlin-bom')
+	implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.20"
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    implementation 'com.google.guava:guava:29.0-jre'
-    testImplementation 'org.jetbrains.kotlin:kotlin-test'
-    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
-
 	implementation group: 'com.beust', name: 'klaxon', version: '5.5'
 
 	implementation platform("org.lwjgl:lwjgl-bom:3.2.3")
@@ -28,12 +31,12 @@ dependencies {
 	implementation "org.lwjgl:lwjgl-openal"
 	implementation "org.lwjgl:lwjgl-opengl"
 	implementation "org.lwjgl:lwjgl-stb"
-	runtimeOnly "org.lwjgl:lwjgl::natives-windows"
-	runtimeOnly "org.lwjgl:lwjgl-assimp::natives-windows"
-	runtimeOnly "org.lwjgl:lwjgl-glfw::natives-windows"
-	runtimeOnly "org.lwjgl:lwjgl-openal::natives-windows"
-	runtimeOnly "org.lwjgl:lwjgl-opengl::natives-windows"
-	runtimeOnly "org.lwjgl:lwjgl-stb::natives-windows"
+	implementation "org.lwjgl:lwjgl::natives-windows"
+	implementation "org.lwjgl:lwjgl-assimp::natives-windows"
+	implementation "org.lwjgl:lwjgl-glfw::natives-windows"
+	implementation "org.lwjgl:lwjgl-openal::natives-windows"
+	implementation "org.lwjgl:lwjgl-opengl::natives-windows"
+	implementation "org.lwjgl:lwjgl-stb::natives-windows"
 }
 
 application {

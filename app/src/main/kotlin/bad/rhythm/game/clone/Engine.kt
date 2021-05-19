@@ -3,14 +3,15 @@ package bad.rhythm.game.clone
 import com.beust.klaxon.*
 import java.io.File
 import java.nio.*
-import org.lwjgl.*
-import org.lwjgl.glfw.*
+
+import org.lwjgl.opengl.GL11.*
+import org.lwjgl.*;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
+
 import org.lwjgl.glfw.Callbacks.*
 import org.lwjgl.glfw.GLFW.*
-import org.lwjgl.opengl.*
-import org.lwjgl.opengl.GL11.*
-import org.lwjgl.system.*
-import org.lwjgl.system.MemoryStack.*
 import org.lwjgl.system.MemoryUtil.*
 
 class Engine {
