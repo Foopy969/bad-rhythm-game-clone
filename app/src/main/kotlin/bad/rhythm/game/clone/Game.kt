@@ -24,4 +24,8 @@ class Game(var map: Beatmap) {
 
         return output.toTypedArray()
     }
+
+    fun verify(column: Int, time: Long) {
+
+    }
 }
