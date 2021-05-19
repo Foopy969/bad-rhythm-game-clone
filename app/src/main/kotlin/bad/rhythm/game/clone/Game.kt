@@ -19,7 +19,7 @@ class Game(var map: Beatmap) {
         var currentSection = map.sections[0]
 
         currentSection.hitObjects.forEach {
-            output.add(Pair(it.column, (approachRate * (currentTime - 10f * it.time / currentSection.bpm + 1f)).coerceIn(-1f, 1f)))
+            output.add(Pair(it.column, (approachRate * (currentTime - 10f * it.time / currentSection.bpm)).coerceIn(-1f, 1f) + 1f))
         }
 
         return output.toTypedArray()
